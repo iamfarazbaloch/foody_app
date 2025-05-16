@@ -23,10 +23,10 @@ class MySearchField extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.shade300,
-                  spreadRadius: 2,
+                  color: Colors.grey.shade100,
+                  spreadRadius: 3,
                   blurRadius: 2,
-                  offset: const Offset(1, 2),
+                  offset: const Offset(1, 4),
                 ),
               ],
             ),

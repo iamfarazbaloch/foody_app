@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage> {
                         color:
                             isSelected
                                 ? const Color(0xFFEF2A39)
-                                : Colors.grey.shade200,
+                                : Colors.grey.shade100,
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text(
@@ -123,14 +123,14 @@ class _HomePageState extends State<HomePage> {
                     crossAxisCount: 2,
                     crossAxisSpacing: 16,
                     mainAxisSpacing: 16,
-                    childAspectRatio: 0.85,
+                    childAspectRatio: 0.8,
                   ),
                   itemBuilder: (context, index) {
                     final food = foodList[index];
                     return Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: Colors.grey.shade200,
+                        color: Colors.grey.shade100,
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: Column(
