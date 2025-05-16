@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class MySearchField extends StatelessWidget {
-  const MySearchField({super.key});
+  final TextEditingController controller;
+  const MySearchField({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +30,8 @@ class MySearchField extends StatelessWidget {
                 ),
               ],
             ),
-            child: const TextField(
-              textAlignVertical: TextAlignVertical.center,
+            child: TextField(
+              controller: controller,
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.search, size: 30),
                 hintText: 'Search',
