@@ -5,24 +5,64 @@ class MySearchField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 60,
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: TextField(
-        decoration: InputDecoration(
-          contentPadding: const EdgeInsets.all(8),
-          prefixIcon: const Icon(Icons.search, size: 30),
-          hintText: 'Search',
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide.none,
+    return Row(
+      children: [
+        Expanded(
+          child: Container(
+            height: 60,
+            margin: const EdgeInsets.only(
+              left: 16,
+              top: 16,
+              bottom: 16,
+              right: 8,
+            ),
+            padding: const EdgeInsets.only(left: 10),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.shade300,
+                  spreadRadius: 2,
+                  blurRadius: 2,
+                  offset: const Offset(1, 2),
+                ),
+              ],
+            ),
+            child: const TextField(
+              textAlignVertical: TextAlignVertical.center,
+              decoration: InputDecoration(
+                prefixIcon: Icon(Icons.search, size: 30),
+                hintText: 'Search',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  borderSide: BorderSide.none,
+                ),
+              ),
+            ),
           ),
         ),
-      ),
+        Container(
+          height: 60,
+          width: 60,
+          margin: const EdgeInsets.only(right: 18),
+          decoration: BoxDecoration(
+            color: const Color(0xFFEF2A39),
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.shade300,
+                spreadRadius: 2,
+                blurRadius: 2,
+                offset: const Offset(1, 2),
+              ),
+            ],
+          ),
+          child: Center(
+            child: Image.asset('assets/images/menu.png', fit: BoxFit.contain),
+          ),
+        ),
+      ],
     );
   }
 }
