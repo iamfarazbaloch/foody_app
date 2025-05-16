@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../model/food_model.dart';
 import '../widgets/my_search_field.dart';
+import 'detail_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -138,7 +139,15 @@ class _HomePageState extends State<HomePage> {
                           // Food image
                           Center(
                             child: GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder:
+                                        (context) => DetailPage(food: food),
+                                  ),
+                                );
+                              },
                               child: Image.asset(
                                 food.image,
                                 height: 110,
