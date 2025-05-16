@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:foody_app/pages/home_page.dart';
+import 'package:foody_app/pages/app_main_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SplashPage extends StatefulWidget {
@@ -17,7 +17,7 @@ class _SplashPageState extends State<SplashPage> {
       if (!mounted) return;
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
+        MaterialPageRoute(builder: (context) => const AppMainScreen()),
       );
     });
   }

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:foody_app/widgets/my_search_field.dart';
+import 'package:provider/provider.dart';
+
+import '../model/food_model.dart';
+import '../widgets/my_search_field.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,12 +18,14 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final foodList = Provider.of<FoodProvider>(context).foods;
+
     return Scaffold(
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Title & Profile Image
+            // App Title & Profile Image
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Row(
@@ -38,6 +43,8 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
 
+            const SizedBox(height: 8),
+
             // Subtitle
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0),
@@ -47,11 +54,14 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
 
+            const SizedBox(height: 16),
+
             // Search Field
             MySearchField(controller: TextEditingController()),
 
-            // Category Selector
             const SizedBox(height: 20),
+
+            // Category Selector
             SizedBox(
               height: 60,
               child: ListView.builder(
@@ -93,6 +103,77 @@ class _HomePageState extends State<HomePage> {
                     ),
                   );
                 },
+              ),
+            ),
+            SizedBox(height: 20),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0,
+                  vertical: 8,
+                ),
+                child: GridView.builder(
+                  itemCount: foodList.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
+                    childAspectRatio: 0.85,
+                  ),
+                  itemBuilder: (context, index) {
+                    final food = foodList[index];
+                    return Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade200,
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Food image
+                          Center(
+                            child: Image.asset(
+                              food.image,
+                              height: 110,
+                              width: double.infinity,
+                              fit: BoxFit.none,
+                            ),
+                          ),
+                          Spacer(),
+                          Text(
+                            food.name,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            food.category,
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                          const Spacer(),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.star,
+                                    size: 14,
+                                    color: Colors.amber,
+                                  ),
+                                  Text(food.rating),
+                                ],
+                              ),
+                              Icon(Icons.favorite_outline),
+                            ],
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
           ],
