@@ -18,7 +18,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final foodList = Provider.of<FoodProvider>(context).foods;
+    final foodProvider = Provider.of<FoodProvider>(context);
+    final foodList = foodProvider.foods;
 
     return Scaffold(
       body: SafeArea(
@@ -105,7 +106,10 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
             ),
-            SizedBox(height: 20),
+
+            const SizedBox(height: 20),
+
+            // Food Grid
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(
@@ -133,14 +137,17 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           // Food image
                           Center(
-                            child: Image.asset(
-                              food.image,
-                              height: 110,
-                              width: double.infinity,
-                              fit: BoxFit.none,
+                            child: GestureDetector(
+                              onTap: () {},
+                              child: Image.asset(
+                                food.image,
+                                height: 110,
+                                width: double.infinity,
+                                fit: BoxFit.contain,
+                              ),
                             ),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           Text(
                             food.name,
                             style: const TextStyle(
@@ -163,10 +170,24 @@ class _HomePageState extends State<HomePage> {
                                     size: 14,
                                     color: Colors.amber,
                                   ),
+                                  const SizedBox(width: 4),
                                   Text(food.rating),
                                 ],
                               ),
-                              Icon(Icons.favorite_outline),
+                              GestureDetector(
+                                onTap: () {
+                                  foodProvider.toggleFavorite(food);
+                                },
+                                child: Icon(
+                                  food.isFavorite
+                                      ? Icons.favorite
+                                      : Icons.favorite_border,
+                                  color:
+                                      food.isFavorite
+                                          ? Colors.red
+                                          : Colors.grey,
+                                ),
+                              ),
                             ],
                           ),
                         ],

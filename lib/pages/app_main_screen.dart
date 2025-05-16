@@ -3,6 +3,7 @@ import 'package:foody_app/pages/chat_page.dart';
 import 'package:foody_app/pages/favorite_page.dart';
 import 'package:foody_app/pages/home_page.dart';
 import 'package:foody_app/pages/profile_page.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 class AppMainScreen extends StatefulWidget {
   const AppMainScreen({super.key});
@@ -20,30 +21,28 @@ class _AppMainScreenState extends State<AppMainScreen> {
     ChatPage(),
     FavoritePage(),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: IndexedStack(index: currentIndex, children: pages),
-      bottomNavigationBar: BottomNavigationBar(
-        elevation: 0,
-        currentIndex: currentIndex,
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Color(0xFFEF2A39),
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.grey.shade300,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        onTap: (value) {
+      bottomNavigationBar: CurvedNavigationBar(
+        index: currentIndex,
+        backgroundColor: Colors.transparent,
+        color: const Color(0xFFEF2A39),
+        buttonBackgroundColor: Color(0xFFEF2A39),
+        animationDuration: const Duration(milliseconds: 300),
+        items: const [
+          Icon(Icons.home, color: Colors.white),
+          Icon(Icons.person, color: Colors.white),
+          Icon(Icons.chat, color: Colors.white),
+          Icon(Icons.favorite, color: Colors.white),
+        ],
+        onTap: (index) {
           setState(() {
-            currentIndex = value;
+            currentIndex = index;
           });
         },
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.chat), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: ''),
-        ],
       ),
     );
   }
